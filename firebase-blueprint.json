@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "SiteConfig": {
+      "title": "Site Configuration",
+      "description": "Global settings for the website",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "workingHours": { "type": "string" },
+        "location": { "type": "string" },
+        "adminPassword": { "type": "string" },
+        "trainerName": { "type": "string" },
+        "trainerImage": { "type": "string" }
+      },
+      "required": ["username", "adminPassword"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Training courses offered",
+      "type": "object",
+      "properties": {
+        "number": { "type": "string" },
+        "price": { "type": "number" },
+        "discount": { "type": "number" },
+        "telegramLink": { "type": "string" },
+        "location": { "type": "string" },
+        "imageUrl": { "type": "string" }
+      }
+    },
+    "Post": {
+      "title": "Post",
+      "description": "General posts or news",
+      "type": "object",
+      "properties": {
+        "number": { "type": "string" },
+        "location": { "type": "string" },
+        "price": { "type": "number" },
+        "discount": { "type": "number" },
+        "note": { "type": "string" },
+        "imageUrl": { "type": "string" }
+      }
+    },
+    "Software": {
+      "title": "Software Service",
+      "description": "Software repair services",
+      "type": "object",
+      "properties": {
+        "deviceName": { "type": "string" },
+        "service": { "type": "string" },
+        "price": { "type": "number" },
+        "location": { "type": "string" }
+      }
+    },
+    "Screen": {
+      "title": "Screen Service",
+      "description": "Screen replacement services",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "discount": { "type": "number" },
+        "number": { "type": "string" },
+        "location": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "config/site": { "schema": "SiteConfig", "description": "Global site configuration" },
+    "courses": { "schema": "Course", "description": "List of courses" },
+    "posts": { "schema": "Post", "description": "List of posts" },
+    "software": { "schema": "Software", "description": "List of software services" },
+    "screens": { "schema": "Screen", "description": "List of screen services" }
+  }
+}

@@ -1,0 +1,93 @@
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: config/site
+// Document ID: site
+// Fields:
+//   - username: string (required) - Site name
+//   - workingHours: string (required) - Business hours
+//   - location: string (required) - Physical address
+//   - adminPassword: string (required) - Panel password
+//   - trainerName: string (required) - Trainer name
+//   - trainerImage: string (required) - Trainer photo (URL or base64)
+//
+// Collection: courses
+// Fields:
+//   - number: string (required) - Contact number
+//   - price: number (required) - Course price
+//   - discount: number (required) - Discount percentage
+//   - telegramLink: string (required) - Registration link
+//   - location: string (required) - Training location
+//   - imageUrl: string (required) - Course image
+//
+// Collection: posts
+// Fields:
+//   - number: string (required) - Reference number
+//   - location: string (required) - Location
+//   - price: number (required) - Price
+//   - discount: number (required) - Discount
+//   - note: string (required) - Description
+//   - imageUrl: string (required) - Post image
+//
+// Collection: software
+// Fields:
+//   - deviceName: string (required) - Device model
+//   - service: string (required) - Service type
+//   - price: number (required) - Cost
+//   - location: string (required) - Location
+//
+// Collection: screens
+// Fields:
+//   - name: string (required) - Screen model
+//   - price: number (required) - Cost
+//   - discount: number (required) - Discount
+//   - number: string (required) - Reference number
+//   - location: string (required) - Location
+//
+// ===============================================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+             (request.auth.token.email == "ahmed2iraq60@gmail.com" || 
+              request.auth.uid == "pY4icAaYFCRofASQJJuauWpXOPR2");
+    }
+
+    match /config/site {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /courses/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /posts/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /software/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /screens/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}
